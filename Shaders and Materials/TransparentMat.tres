@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://blngjroxbtn1d"]
+
+[ext_resource type="Shader" uid="uid://cv14kj64a4tpn" path="res://Shaders and Materials/TransparentShader.gdshader" id="1_p2cc0"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_p2cc0")
+shader_parameter/onoff = 0.0
+shader_parameter/bits_per_channel = 4.0
+shader_parameter/dither_strength = 0.1
+shader_parameter/bloom_threshold = 0.5
+shader_parameter/bloom_intensity = 2.0
+shader_parameter/pixelation = 10.0
+shader_parameter/color_relaxation = 0.5
+shader_parameter/relaxation_color = Vector3(1, 1, 1)
+shader_parameter/threshold_r = 0.5
+shader_parameter/threshold_g = 0.5
+shader_parameter/threshold_b = 0.5
+shader_parameter/threshold_color = Vector3(1, 1, 1)

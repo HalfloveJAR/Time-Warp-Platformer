@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://botixe1eaan2q"]
+
+[ext_resource type="Script" uid="uid://crrvkp1rdhp1n" path="res://Scripts/blue_spike.gd" id="1_6kkxp"]
+[ext_resource type="Texture2D" uid="uid://im5nd3hkjd5n" path="res://Textures/Placeholder Textures/Spike3.png" id="2_6kkxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdq0k"]
+size = Vector2(12, 6)
+
+[node name="SolidSpike" type="Area2D" groups=["Solid"]]
+script = ExtResource("1_6kkxp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+texture = ExtResource("2_6kkxp")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(8, -3)
+shape = SubResource("RectangleShape2D_xdq0k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

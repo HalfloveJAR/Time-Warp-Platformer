@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnnh6b55dky5k"]
+
+[ext_resource type="Script" uid="uid://bo5prpl8gixpg" path="res://Scripts/end_level_portal.gd" id="1_axjt8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7qfg"]
+radius = 15.0333
+
+[node name="EndLevelPortal" type="Area2D"]
+script = ExtResource("1_axjt8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h7qfg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
