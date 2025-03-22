@@ -14,44 +14,44 @@
 [ext_resource type="PackedScene" uid="uid://betv61y1yrqms" path="res://Scenes/Placeholder Scenes/green_spike.tscn" id="11_lbhs4"]
 [ext_resource type="PackedScene" uid="uid://dnnh6b55dky5k" path="res://Scenes/Placeholder Scenes/end_level_portal.tscn" id="13_wlhec"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8yebq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlhec"]
 texture = ExtResource("1_o68yd")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_usauq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0kff"]
 texture = ExtResource("2_02dnv")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_crxn3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_23xeb"]
 texture = ExtResource("6_eqrhf")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsudv"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bodv4"]
 texture = ExtResource("7_a1tjs")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, 8, -6, 2, 6, 2, 7, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4t86v"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjoyo"]
 texture = ExtResource("8_usuql")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, 8, -5, 2, 5, 2, 7, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_66cy4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1td61"]
 texture = ExtResource("9_udxnn")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-7, 8, -5, 2, 5, 2, 7, 8)
 
 [sub_resource type="TileSet" id="TileSet_qtkaq"]
 physics_layer_0/collision_layer = 2
-sources/0 = SubResource("TileSetAtlasSource_8yebq")
-sources/3 = SubResource("TileSetAtlasSource_wsudv")
-sources/2 = SubResource("TileSetAtlasSource_crxn3")
-sources/1 = SubResource("TileSetAtlasSource_usauq")
-sources/5 = SubResource("TileSetAtlasSource_4t86v")
-sources/6 = SubResource("TileSetAtlasSource_66cy4")
+sources/0 = SubResource("TileSetAtlasSource_wlhec")
+sources/3 = SubResource("TileSetAtlasSource_bodv4")
+sources/2 = SubResource("TileSetAtlasSource_23xeb")
+sources/1 = SubResource("TileSetAtlasSource_p0kff")
+sources/5 = SubResource("TileSetAtlasSource_kjoyo")
+sources/6 = SubResource("TileSetAtlasSource_1td61")
 
 [node name="Level" type="Node2D"]
 
@@ -75,15 +75,20 @@ tile_map_data = PackedByteArray("AAD6/wQAAgAAAAAAAAD5/wQAAgAAAAAAAAD4/wQAAgAAAAA
 tile_set = SubResource("TileSet_qtkaq")
 
 [node name="DebugUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Coyote" type="Label" parent="DebugUI"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
 
+[node name="JumpBuffer" type="Label" parent="DebugUI"]
+offset_top = 21.0
+offset_right = 40.0
+offset_bottom = 44.0
+text = "test"
+
 [node name="Player" parent="." instance=ExtResource("3_kl7wo")]
-position = Vector2(-159, 47)
+position = Vector2(7, -340)
 
 [node name="Hazards" type="Node" parent="."]
 

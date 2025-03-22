@@ -2,16 +2,19 @@ extends CharacterBody2D
 
 var can_jump = true
 var can_start_coyote_time = true
+var jump_buffer = false
 @onready var death_pos = self.position
 @onready var checkpoint = $"../checkpoint"
 @onready var coyote_time = $CoyoteTime
 @onready var coyote_label = $"../DebugUI/Coyote"
+@onready var jump_label = $"../DebugUI/JumpBuffer"
 @onready var tilemap_controller = $"../TileMapController"
 
 @export var accel = 90.0
 @export var decel = 180.0
 @export var max_speed = 220.0
 @export var jump_velocity = -315.0
+@export var jump_buffer_time = 0.1
 @export var coyote_time_val = 0.07
 @export var checkpoints_available = 1
 
@@ -19,19 +22,27 @@ func _physics_process(delta: float) -> void:
 	coyote_label.text = "Coyote Time: " + str(coyote_time.time_left)
 	# Add the gravity.
 	if not is_on_floor():
+		jump_label.text = "On Floor: False"
 		velocity += get_gravity() * delta
 		if coyote_time.is_stopped() and can_start_coyote_time:
 			coyote_time.start(coyote_time_val)
 			can_start_coyote_time = false
 			#print("Timer started")
-	elif !can_jump:
+	else:
+		jump_label.text = "On Floor: True"
 		can_jump = true
 		can_start_coyote_time = true
+		if jump_buffer:
+			jump()
+			jump_buffer = false
 
 	# Handle jump.
-	if Input.is_action_pressed("ui_accept") and can_jump:
-		velocity.y = jump_velocity
-		can_jump = false
+	if Input.is_action_just_pressed("ui_accept"):
+		if can_jump:
+			jump()
+		else:
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_time).timeout.connect(_on_jump_buffer_timeout)
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -49,6 +60,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Spawn Checkpoint"):
 		spawn_checkpoint()
+
+func jump() -> void:
+	velocity.y = jump_velocity
+	can_jump = false
 
 func respawn() -> void:
 	# Get highest value checkpoint
@@ -70,4 +85,6 @@ func spawn_checkpoint() -> void:
 
 func _on_coyote_time_timeout() -> void:
 	can_jump = false
-	#print("Timer stopped")
+
+func _on_jump_buffer_timeout() -> void:
+	jump_buffer = false
