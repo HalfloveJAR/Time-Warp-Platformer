@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://doareqp12r2j4"]
+[gd_scene load_steps=23 format=4 uid="uid://doareqp12r2j4"]
 
 [ext_resource type="Script" uid="uid://dj1qial5tsek6" path="res://Scripts/tile_map_controller.gd" id="1_di4pl"]
 [ext_resource type="Texture2D" uid="uid://dh7wktj36y25v" path="res://Textures/Placeholder Textures/Floor1.png" id="1_o68yd"]
@@ -10,9 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://b060turk3jfsc" path="res://Textures/Placeholder Textures/Spike2.png" id="8_usuql"]
 [ext_resource type="Texture2D" uid="uid://im5nd3hkjd5n" path="res://Textures/Placeholder Textures/Spike3.png" id="9_udxnn"]
 [ext_resource type="PackedScene" uid="uid://botixe1eaan2q" path="res://Scenes/Placeholder Scenes/solid_spike.tscn" id="10_5e7vy"]
+[ext_resource type="PackedScene" uid="uid://hduviynlratd" path="res://Scenes/Placeholder Scenes/camera_2d.tscn" id="10_p0kff"]
 [ext_resource type="PackedScene" uid="uid://cxjfhlbxquy64" path="res://Scenes/Placeholder Scenes/blue_spike.tscn" id="10_ws0xe"]
 [ext_resource type="PackedScene" uid="uid://betv61y1yrqms" path="res://Scenes/Placeholder Scenes/green_spike.tscn" id="11_lbhs4"]
 [ext_resource type="PackedScene" uid="uid://dnnh6b55dky5k" path="res://Scenes/Placeholder Scenes/end_level_portal.tscn" id="13_wlhec"]
+[ext_resource type="PackedScene" uid="uid://bue1886lfdwus" path="res://Scenes/Placeholder Scenes/camera_bounds.tscn" id="15_23xeb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlhec"]
 texture = ExtResource("1_o68yd")
@@ -75,20 +77,17 @@ tile_map_data = PackedByteArray("AAD6/wQAAgAAAAAAAAD5/wQAAgAAAAAAAAD4/wQAAgAAAAA
 tile_set = SubResource("TileSet_qtkaq")
 
 [node name="DebugUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Coyote" type="Label" parent="DebugUI"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
 
-[node name="JumpBuffer" type="Label" parent="DebugUI"]
-offset_top = 21.0
-offset_right = 40.0
-offset_bottom = 44.0
-text = "test"
-
 [node name="Player" parent="." instance=ExtResource("3_kl7wo")]
-position = Vector2(7, -340)
+position = Vector2(-161, 45)
+
+[node name="Camera2D" parent="Player" instance=ExtResource("10_p0kff")]
 
 [node name="Hazards" type="Node" parent="."]
 
@@ -325,3 +324,6 @@ position = Vector2(240, -192)
 
 [node name="EndLevelPortal" parent="." instance=ExtResource("13_wlhec")]
 position = Vector2(147, -404)
+
+[node name="CameraBounds" parent="." instance=ExtResource("15_23xeb")]
+position = Vector2(407, -159)

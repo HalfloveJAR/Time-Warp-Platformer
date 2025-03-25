@@ -9,7 +9,8 @@ var current_level = 0
 var final_level = levels.size()
 
 func _ready():
-	get_tree().change_scene_to_packed(levels[current_level])
+	#get_tree().change_scene_to_packed(levels[current_level])
+	pass
 
 func next_level():
 	current_level += 1

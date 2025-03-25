@@ -3,12 +3,16 @@ extends CharacterBody2D
 var can_jump = true
 var can_start_coyote_time = true
 var jump_buffer = false
+
+var camera_bounds_set = false
+
 @onready var death_pos = self.position
 @onready var checkpoint = $"../checkpoint"
 @onready var coyote_time = $CoyoteTime
 @onready var coyote_label = $"../DebugUI/Coyote"
-@onready var jump_label = $"../DebugUI/JumpBuffer"
 @onready var tilemap_controller = $"../TileMapController"
+@onready var camera_bounds: CollisionShape2D = $"../CameraBounds/CollisionShape2D"
+@onready var camera = $Camera2D
 
 @export var accel = 90.0
 @export var decel = 180.0
@@ -19,17 +23,32 @@ var jump_buffer = false
 @export var checkpoints_available = 1
 
 func _physics_process(delta: float) -> void:
-	coyote_label.text = "Coyote Time: " + str(coyote_time.time_left)
+	#coyote_label.text = "Coyote Time: " + str(coyote_time.time_left)
+	
+	if camera_bounds_set == false:
+		camera_bounds = get_node_or_null("../CameraBounds/CollisionShape2D")
+		if camera_bounds != null:
+			var pos = camera_bounds.get_parent().global_position
+			var width = camera_bounds.shape.size.x
+			var height = camera_bounds.shape.size.y
+			var top = pos.y - (height/2) 
+			var bot = pos.y + (height/2) 
+			var left = pos.x - (width/2)
+			var right = pos.x + (width/2)
+			camera.limit_top = top
+			camera.limit_bottom = bot
+			camera.limit_left = left
+			camera.limit_right = right
+			camera_bounds_set = true
+	
 	# Add the gravity.
 	if not is_on_floor():
-		jump_label.text = "On Floor: False"
 		velocity += get_gravity() * delta
 		if coyote_time.is_stopped() and can_start_coyote_time:
 			coyote_time.start(coyote_time_val)
 			can_start_coyote_time = false
 			#print("Timer started")
 	else:
-		jump_label.text = "On Floor: True"
 		can_jump = true
 		can_start_coyote_time = true
 		if jump_buffer:

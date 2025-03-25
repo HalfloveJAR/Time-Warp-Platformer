@@ -17,10 +17,6 @@ shape = SubResource("RectangleShape2D_7tnak")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jdcxf")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-
 [node name="CoyoteTime" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
