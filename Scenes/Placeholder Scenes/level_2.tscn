@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dwsbg180ruyl7"]
+[gd_scene load_steps=19 format=4 uid="uid://dwsbg180ruyl7"]
 
 [ext_resource type="Script" uid="uid://dj1qial5tsek6" path="res://Scripts/tile_map_controller.gd" id="1_wif5e"]
 [ext_resource type="Texture2D" uid="uid://dh7wktj36y25v" path="res://Textures/Placeholder Textures/Floor1.png" id="2_tq8e3"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://daw547jfgdwyh" path="res://Scenes/Placeholder Scenes/player.tscn" id="8_7kstj"]
 [ext_resource type="PackedScene" uid="uid://bue1886lfdwus" path="res://Scenes/Placeholder Scenes/camera_bounds.tscn" id="9_2fvu0"]
 [ext_resource type="PackedScene" uid="uid://hduviynlratd" path="res://Scenes/Placeholder Scenes/camera_2d.tscn" id="9_p7kic"]
+[ext_resource type="PackedScene" uid="uid://dnpck2xd6av30" path="res://Scenes/Placeholder Scenes/moving_platform.tscn" id="11_7kstj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6hmt"]
 texture = ExtResource("2_tq8e3")
@@ -52,6 +53,8 @@ sources/6 = SubResource("TileSetAtlasSource_4rqgo")
 
 [node name="level2" type="Node2D"]
 
+[node name="MovingPlatform" parent="." instance=ExtResource("11_7kstj")]
+
 [node name="TileMapController" type="Node" parent="."]
 script = ExtResource("1_wif5e")
 
@@ -82,4 +85,5 @@ position = Vector2(-159, 47)
 [node name="Hazards" type="Node" parent="."]
 
 [node name="CameraBounds" parent="." instance=ExtResource("9_2fvu0")]
+visible = false
 position = Vector2(408, -195)

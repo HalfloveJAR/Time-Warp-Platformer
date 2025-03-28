@@ -25,21 +25,7 @@ var camera_bounds_set = false
 func _physics_process(delta: float) -> void:
 	#coyote_label.text = "Coyote Time: " + str(coyote_time.time_left)
 	
-	if camera_bounds_set == false:
-		camera_bounds = get_node_or_null("../CameraBounds/CollisionShape2D")
-		if camera_bounds != null:
-			var pos = camera_bounds.get_parent().global_position
-			var width = camera_bounds.shape.size.x
-			var height = camera_bounds.shape.size.y
-			var top = pos.y - (height/2) 
-			var bot = pos.y + (height/2) 
-			var left = pos.x - (width/2)
-			var right = pos.x + (width/2)
-			camera.limit_top = top
-			camera.limit_bottom = bot
-			camera.limit_left = left
-			camera.limit_right = right
-			camera_bounds_set = true
+	if camera_bounds_set == false: set_camera_bounds()
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -101,6 +87,21 @@ func spawn_checkpoint() -> void:
 	else:
 		print("You don't have available checkpoints")
 
+func set_camera_bounds() -> void:
+	camera_bounds = get_node_or_null("../CameraBounds/CollisionShape2D")
+	if camera_bounds != null:
+		var pos = camera_bounds.get_parent().global_position
+		var width = camera_bounds.shape.size.x
+		var height = camera_bounds.shape.size.y
+		var top = pos.y - (height/2) 
+		var bot = pos.y + (height/2) 
+		var left = pos.x - (width/2)
+		var right = pos.x + (width/2)
+		camera.limit_top = top
+		camera.limit_bottom = bot
+		camera.limit_left = left
+		camera.limit_right = right
+		camera_bounds_set = true
 
 func _on_coyote_time_timeout() -> void:
 	can_jump = false
