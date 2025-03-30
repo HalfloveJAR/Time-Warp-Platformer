@@ -90,7 +90,6 @@ position = Vector2(408, -195)
 
 [node name="RigidBody2D" parent="." instance=ExtResource("11_7kstj")]
 position = Vector2(64, 72)
-speed = 100
 
 [node name="Marker2D" type="Marker2D" parent="RigidBody2D"]
 top_level = true
