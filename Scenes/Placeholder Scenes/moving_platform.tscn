@@ -9,7 +9,7 @@ size = Vector2(82, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e75am"]
 size = Vector2(78, 16)
 
-[node name="AnimatableBody2D" type="AnimatableBody2D"]
+[node name="MovingPlatform" type="AnimatableBody2D"]
 collision_layer = 2
 script = ExtResource("1_j4phk")
 

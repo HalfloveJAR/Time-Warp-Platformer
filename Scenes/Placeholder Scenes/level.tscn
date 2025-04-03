@@ -77,11 +77,22 @@ tile_map_data = PackedByteArray("AAD6/wQAAgAAAAAAAAD5/wQAAgAAAAAAAAD4/wQAAgAAAAA
 tile_set = SubResource("TileSet_qtkaq")
 
 [node name="DebugUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Coyote" type="Label" parent="DebugUI"]
 offset_right = 40.0
 offset_bottom = 23.0
+text = "test"
+
+[node name="Floor" type="Label" parent="DebugUI"]
+offset_top = 22.0
+offset_right = 40.0
+offset_bottom = 45.0
+text = "test"
+
+[node name="Stuck" type="Label" parent="DebugUI"]
+offset_top = 44.0
+offset_right = 40.0
+offset_bottom = 67.0
 text = "test"
 
 [node name="Player" parent="." instance=ExtResource("3_kl7wo")]

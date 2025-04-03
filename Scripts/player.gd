@@ -10,6 +10,8 @@ var camera_bounds_set = false
 @onready var checkpoint = $"../checkpoint"
 @onready var coyote_time = $CoyoteTime
 @onready var coyote_label = $"../DebugUI/Coyote"
+@onready var floor_label = $"../DebugUI/Floor"
+@onready var stuck_label = $"../DebugUI/Stuck"
 @onready var tilemap_controller = $"../TileMapController"
 @onready var camera_bounds: CollisionShape2D = $"../CameraBounds/CollisionShape2D"
 @onready var camera = $Camera2D
@@ -21,6 +23,19 @@ var camera_bounds_set = false
 @export var jump_buffer_time = 0.1
 @export var coyote_time_val = 0.07
 @export var checkpoints_available = 1
+
+func _process(_delta: float) -> void:
+	if floor_label == null or stuck_label == null:
+		return
+	if not is_on_floor():
+		floor_label.text = "On floor = false"
+		if is_player_stuck():
+			stuck_label.text = "Stuck = true"
+			respawn()
+		else:
+			stuck_label.text = "Stuck = false"
+	else:
+		floor_label.text = "On floor = true"
 
 func _physics_process(delta: float) -> void:
 	#coyote_label.text = "Coyote Time: " + str(coyote_time.time_left)
@@ -71,10 +86,7 @@ func jump() -> void:
 	can_jump = false
 
 func respawn() -> void:
-	# Get highest value checkpoint
-	# Set health to max health
-	# Set location to highest val checkpoint
-	tilemap_controller.set_layer.call_deferred(2)
+	tilemap_controller.set_layer.call_deferred(2) # Reset current floor layer to default
 	self.position = death_pos
 
 func spawn_checkpoint() -> void:
@@ -108,3 +120,25 @@ func _on_coyote_time_timeout() -> void:
 
 func _on_jump_buffer_timeout() -> void:
 	jump_buffer = false
+
+func is_player_stuck():
+	var tilemap: TileMapLayer
+	if $"../TileMapController".HiddenLayer == 2:
+		tilemap = $"../TileMapController/Floor1_Blue"
+	else:
+		tilemap = $"../TileMapController/Floor2_Green"
+	
+	if not tilemap: # Checks if TileMap is null, kind of redundant
+		return false 
+
+	# Convert player's position to tilemap coordinates
+	var tile_pos = tilemap.local_to_map(global_position)
+	
+	# Get the tile data at that position
+	var tile_data = tilemap.get_cell_tile_data(tile_pos)
+	
+	if tile_data:
+		# Check if the tile has the "solid" physics layer set
+		return tile_data.get_collision_polygons_count(0) > 0
+		
+	return false
