@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dwsbg180ruyl7"]
+[gd_scene load_steps=21 format=4 uid="uid://dwsbg180ruyl7"]
 
 [ext_resource type="Script" uid="uid://dj1qial5tsek6" path="res://Scripts/tile_map_controller.gd" id="1_wif5e"]
 [ext_resource type="Texture2D" uid="uid://dh7wktj36y25v" path="res://Textures/Placeholder Textures/Floor1.png" id="2_tq8e3"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://hduviynlratd" path="res://Scenes/Placeholder Scenes/camera_2d.tscn" id="9_p7kic"]
 [ext_resource type="PackedScene" uid="uid://dnpck2xd6av30" path="res://Scenes/Placeholder Scenes/moving_platform.tscn" id="11_7kstj"]
 [ext_resource type="PackedScene" uid="uid://botixe1eaan2q" path="res://Scenes/Placeholder Scenes/solid_spike.tscn" id="12_1yfpb"]
+[ext_resource type="PackedScene" uid="uid://g0yj1lxo03ru" path="res://Scenes/Placeholder Scenes/laser.tscn" id="13_q1cbe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6hmt"]
 texture = ExtResource("2_tq8e3")
@@ -79,7 +80,7 @@ offset_bottom = 23.0
 text = "test"
 
 [node name="Player" parent="." instance=ExtResource("8_7kstj")]
-position = Vector2(430, 50)
+position = Vector2(-159, 52)
 
 [node name="Camera2D" parent="Player" instance=ExtResource("9_p7kic")]
 
@@ -150,3 +151,14 @@ rotation = 3.14159
 [node name="SolidSpike9" parent="Hazards" instance=ExtResource("12_1yfpb")]
 position = Vector2(752, 48)
 rotation = 3.14159
+
+[node name="Laser" parent="." instance=ExtResource("13_q1cbe")]
+position = Vector2(329, -16)
+rotation = 1.5708
+target_position = Vector2(81, 0)
+
+[node name="Timer" type="Timer" parent="Laser"]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Laser/Timer" to="Laser" method="_on_timer_timeout"]

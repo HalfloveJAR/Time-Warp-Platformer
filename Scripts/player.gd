@@ -133,6 +133,7 @@ func is_player_stuck():
 
 	# Convert player's position to tilemap coordinates
 	var tile_pos = tilemap.local_to_map(global_position)
+	#print(str(global_position) + " -> " + str(tile_pos))
 	
 	# Get the tile data at that position
 	var tile_data = tilemap.get_cell_tile_data(tile_pos)
