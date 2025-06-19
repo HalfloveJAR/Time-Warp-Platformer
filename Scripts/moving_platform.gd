@@ -65,6 +65,7 @@ func loop_pathing(delta: float) -> void:
 
 # Entered viewport
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	print(self.name, " slowing down from: ", speed, " to: ", default_speed)
 	speed = default_speed
 	padding = 1.0
 
