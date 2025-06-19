@@ -25,6 +25,7 @@ player="Only the player can be in this group"
 Blue=""
 Green=""
 Solid=""
+Laser=""
 
 [input]
 

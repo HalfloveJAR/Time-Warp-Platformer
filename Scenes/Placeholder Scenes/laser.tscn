@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bf3ut2ink23pi" path="res://Scripts/laser.gd" id="1_no6yy"]
 
-[node name="Laser" type="RayCast2D"]
+[node name="Laser" type="RayCast2D" groups=["Laser", "Solid"]]
 position = Vector2(32, 8)
 target_position = Vector2(225, 0)
 script = ExtResource("1_no6yy")

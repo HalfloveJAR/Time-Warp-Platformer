@@ -28,10 +28,16 @@ func set_layer(layer: int) -> void:
 		for node in $"../Hazards".get_children():
 			if node.is_in_group("Blue"):
 				node.visible = false
-				node.get_child(1).disabled = true
+				if node.get_child(1) != null:
+					node.get_child(1).disabled = true
+				elif node.is_in_group("Laser"):
+					node.set_is_casting(false)
 			if node.is_in_group("Green"):
 				node.visible = true
-				node.get_child(1).disabled = false
+				if node.get_child(1) != null:
+					node.get_child(1).disabled = false
+				elif node.is_in_group("Laser"):
+					node.set_is_casting(true)
 		
 		print("Blue layer now hidden")
 	else:
@@ -44,9 +50,15 @@ func set_layer(layer: int) -> void:
 		for node in $"../Hazards".get_children():
 			if node.is_in_group("Blue"):
 				node.visible = true
-				node.get_child(1).disabled = false
+				if node.get_child(1) != null:
+					node.get_child(1).disabled = false
+				elif node.is_in_group("Laser"):
+					node.set_is_casting(true)
 			if node.is_in_group("Green"):
 				node.visible = false
-				node.get_child(1).disabled = true
+				if node.get_child(1) != null:
+					node.get_child(1).disabled = true
+				elif node.is_in_group("Laser"):
+					node.set_is_casting(false)
 		
 		print("Green layer now hidden")

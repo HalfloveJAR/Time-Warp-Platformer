@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6sjvkasqwdnh"]
+
+[ext_resource type="Script" uid="uid://bf3ut2ink23pi" path="res://Scripts/laser.gd" id="1_tniuc"]
+
+[node name="Blue_Laser" type="RayCast2D" groups=["Blue", "Laser"]]
+position = Vector2(32, 8)
+target_position = Vector2(225, 0)
+script = ExtResource("1_tniuc")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 100, 0)
+width = 2.5
+default_color = Color(0.188235, 0.376471, 0.509804, 1)

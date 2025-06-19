@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dwsbg180ruyl7"]
+[gd_scene load_steps=24 format=4 uid="uid://dwsbg180ruyl7"]
 
 [ext_resource type="Script" uid="uid://dj1qial5tsek6" path="res://Scripts/tile_map_controller.gd" id="1_wif5e"]
 [ext_resource type="Texture2D" uid="uid://dh7wktj36y25v" path="res://Textures/Placeholder Textures/Floor1.png" id="2_tq8e3"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dnpck2xd6av30" path="res://Scenes/Placeholder Scenes/moving_platform.tscn" id="11_7kstj"]
 [ext_resource type="PackedScene" uid="uid://botixe1eaan2q" path="res://Scenes/Placeholder Scenes/solid_spike.tscn" id="12_1yfpb"]
 [ext_resource type="PackedScene" uid="uid://g0yj1lxo03ru" path="res://Scenes/Placeholder Scenes/laser.tscn" id="13_q1cbe"]
+[ext_resource type="PackedScene" uid="uid://tftkoyui1wht" path="res://Scenes/Placeholder Scenes/checkpoint.tscn" id="14_e6hmt"]
+[ext_resource type="PackedScene" uid="uid://btssaq5ft100u" path="res://Scenes/Placeholder Scenes/green_laser.tscn" id="14_xfh1y"]
+[ext_resource type="PackedScene" uid="uid://b6sjvkasqwdnh" path="res://Scenes/Placeholder Scenes/blue_laser.tscn" id="15_w2en3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e6hmt"]
 texture = ExtResource("2_tq8e3")
@@ -59,11 +62,11 @@ sources/6 = SubResource("TileSetAtlasSource_4rqgo")
 script = ExtResource("1_wif5e")
 
 [node name="Floor1_Blue" type="TileMapLayer" parent="TileMapController" groups=["Blue"]]
-tile_map_data = PackedByteArray("AAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAArAAcAAAAAAAAAAAAsAAcAAAAAAAAAAAAtAAcAAAAAAAAAAAAuAAcAAAAAAAAAAAAvAAcAAAAAAAAAAAAwAAcAAAAAAAAAAAAqAAcAAAAAAAAAAAApAAcAAAAAAAAAAAAxAAcAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAApAAMAAAAAAAAAAAAqAAMAAAAAAAAAAAAqAAIAAAAAAAAAAAApAAIAAAAAAAAAAAApAAEAAAAAAAAAAAApAAAAAAAAAAAAAAApAP//AAAAAAAAAAAqAP//AAAAAAAAAAAqAAAAAAAAAAAAAAAqAAEAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_yebmu")
 
 [node name="Floor2_Green" type="TileMapLayer" parent="TileMapController" groups=["Green"]]
-tile_map_data = PackedByteArray("AAASAP//AQAAAAAAAAASAAAAAQAAAAAAAAASAAEAAQAAAAAAAAASAAIAAQAAAAAAAAASAAMAAQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAASAP//AQAAAAAAAAASAAAAAQAAAAAAAAASAAEAAQAAAAAAAAASAAIAAQAAAAAAAAASAAMAAQAAAAAAAAApAAcAAQAAAAAAAAAqAAcAAQAAAAAAAAArAAcAAQAAAAAAAAAsAAcAAQAAAAAAAAAtAAcAAQAAAAAAAAAuAAcAAQAAAAAAAAAvAAcAAQAAAAAAAAAwAAcAAQAAAAAAAAAxAAcAAQAAAAAAAAAyAAcAAQAAAAAAAAAzAAcAAQAAAAAAAAA0AAcAAQAAAAAAAAA0AAYAAQAAAAAAAAA0AAUAAQAAAAAAAAA0AAQAAQAAAAAAAAA0AAMAAQAAAAAAAAA0AAIAAQAAAAAAAAA0AAEAAQAAAAAAAAA0AAAAAQAAAAAAAAA0AP//AQAAAAAAAAA=")
 tile_set = SubResource("TileSet_yebmu")
 collision_enabled = false
 
@@ -80,7 +83,7 @@ offset_bottom = 23.0
 text = "test"
 
 [node name="Player" parent="." instance=ExtResource("8_7kstj")]
-position = Vector2(437, 51)
+position = Vector2(-161, 51)
 
 [node name="Camera2D" parent="Player" instance=ExtResource("9_p7kic")]
 
@@ -102,8 +105,7 @@ position = Vector2(240, 72)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("11_7kstj")]
 position = Vector2(624, 72)
-speed = 125
-unloaded_speed_multiplier = 9
+unloaded_speed_multiplier = 10
 path_setting = 1
 
 [node name="Marker2D" type="Marker2D" parent="MovingPlatform2"]
@@ -141,9 +143,44 @@ rotation = 3.14159
 position = Vector2(400, -16)
 rotation = 3.14159
 
+[node name="Blue_Laser" parent="Hazards" instance=ExtResource("15_w2en3")]
+position = Vector2(896, -16)
+target_position = Vector2(80, 0)
+
+[node name="Blue_Laser3" parent="Hazards" instance=ExtResource("15_w2en3")]
+position = Vector2(896, -104)
+target_position = Vector2(80, 0)
+
+[node name="Blue_Laser4" parent="Hazards" instance=ExtResource("15_w2en3")]
+position = Vector2(896, -200)
+target_position = Vector2(80, 0)
+
+[node name="Blue_Laser5" parent="Hazards" instance=ExtResource("15_w2en3")]
+position = Vector2(896, -296)
+target_position = Vector2(80, 0)
+
+[node name="Green_Laser2" parent="Hazards" instance=ExtResource("14_xfh1y")]
+position = Vector2(896, -56)
+target_position = Vector2(80, 0)
+
+[node name="Green_Laser3" parent="Hazards" instance=ExtResource("14_xfh1y")]
+position = Vector2(896, -344)
+target_position = Vector2(80, 0)
+
+[node name="Green_Laser6" parent="Hazards" instance=ExtResource("14_xfh1y")]
+position = Vector2(896, -152)
+target_position = Vector2(80, 0)
+
+[node name="Green_Laser7" parent="Hazards" instance=ExtResource("14_xfh1y")]
+position = Vector2(896, -248)
+target_position = Vector2(80, 0)
+
 [node name="Laser2" parent="." instance=ExtResource("13_q1cbe")]
 position = Vector2(725, -17)
 rotation = 1.57061
 target_position = Vector2(129, 0.0241089)
 collision_mask = 3
 collide_with_areas = true
+
+[node name="checkpoint" parent="." instance=ExtResource("14_e6hmt")]
+position = Vector2(1604, 333)

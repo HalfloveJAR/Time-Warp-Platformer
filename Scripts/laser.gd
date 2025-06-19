@@ -6,11 +6,11 @@ var _is_casting := false # Internal variable for the actual state
 
 # Tutorial for this stuff
 # https://www.youtube.com/watch?v=dg0CQ6NPDn8
-var is_casting := false: # This is now just a property that uses the internal variable
-	set(value):  # Custom setter
+var is_casting := false:
+	set(value):
 		set_is_casting(value)
-	get:          # Custom getter (optional)
-		return _is_casting # Return the internal variable
+	get:
+		return _is_casting
 
 func _ready() -> void:
 	if (start_casting):

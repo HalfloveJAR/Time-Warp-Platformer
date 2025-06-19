@@ -18,6 +18,8 @@ var forward = true
 
 func _ready() -> void:
 	default_speed = speed
+	speed *= unloaded_speed_multiplier
+	padding *= unloaded_speed_multiplier
 	for child in self.get_children():
 		if child is Marker2D:
 			children.append(child)
@@ -65,10 +67,10 @@ func loop_pathing(delta: float) -> void:
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	speed = default_speed
 	padding = 1.0
-	print(self.name, " slowing down. New speed: ", speed)
 
 # Left viewport
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	speed *= unloaded_speed_multiplier
+	var new_speed = speed * unloaded_speed_multiplier
+	print(self.name, " speeding up from: ", speed, " to: ", new_speed)
+	speed = new_speed
 	padding *= unloaded_speed_multiplier
-	print(self.name, " speeding up. New speed: ", speed)
