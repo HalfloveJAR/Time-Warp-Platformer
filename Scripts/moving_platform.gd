@@ -8,33 +8,34 @@ enum PathSetting { LOOP, REVERSE }
 var children = []
 var total_markers: int
 var current_target = 0
+var default_speed
+var padding = 1.0
 @export var speed = 100
+@export var unloaded_speed_multiplier = 2
 @export var path_setting: PathSetting = PathSetting.LOOP
 
 var forward = true
 
 func _ready() -> void:
+	default_speed = speed
 	for child in self.get_children():
 		if child is Marker2D:
 			children.append(child)
 	total_markers = children.size()
 
 func _physics_process(delta: float) -> void:
-	
 	if path_setting == PathSetting.LOOP:
 		loop_pathing(delta)
 	elif path_setting == PathSetting.REVERSE:
 		reverse_pathing(delta)
 
-func compare_vectors(v1: Vector2, v2: Vector2) -> bool:
-	return abs(v1.x - v2.x) <= 1.0 and abs(v1.y - v2.y) <= 1.0
 
 func reverse_pathing(delta: float) -> void:
 	var g_pos = global_position.floor()
 	var marker = children[current_target]
 	var target_pos = marker.global_position.floor()
 
-	if !compare_vectors(g_pos, target_pos):
+	if !SceneManager.compare_vectors(g_pos, target_pos, padding):
 		global_position += global_position.direction_to(marker.global_position) * speed * delta
 		return
 	
@@ -54,8 +55,20 @@ func loop_pathing(delta: float) -> void:
 	var marker = children[current_target]
 	var target_pos = marker.global_position.floor()
 	
-	if compare_vectors(g_pos, target_pos):
+	if SceneManager.compare_vectors(g_pos, target_pos, padding):
 		current_target = (current_target + 1) % total_markers
 		return
 	
 	global_position += global_position.direction_to(marker.global_position) * speed * delta
+
+# Entered viewport
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	speed = default_speed
+	padding = 1.0
+	print(self.name, " slowing down. New speed: ", speed)
+
+# Left viewport
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	speed *= unloaded_speed_multiplier
+	padding *= unloaded_speed_multiplier
+	print(self.name, " speeding up. New speed: ", speed)

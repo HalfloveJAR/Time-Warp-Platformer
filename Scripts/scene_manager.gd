@@ -18,3 +18,6 @@ func next_level():
 		get_tree().change_scene_to_packed(levels[current_level])
 	else:
 		print("No more levels")
+
+func compare_vectors(v1: Vector2, v2: Vector2, padding: float = 1.0) -> bool:
+	return abs(v1.x - v2.x) <= padding and abs(v1.y - v2.y) <= padding

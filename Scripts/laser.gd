@@ -1,5 +1,7 @@
 extends RayCast2D
 
+@export var start_casting = true
+
 var _is_casting := false # Internal variable for the actual state
 
 # Tutorial for this stuff
@@ -11,9 +13,13 @@ var is_casting := false: # This is now just a property that uses the internal va
 		return _is_casting # Return the internal variable
 
 func _ready() -> void:
-	set_physics_process(false)
-	$Line2D.points[1] = Vector2.ZERO
-	$Line2D.visible = _is_casting
+	if (start_casting):
+		set_physics_process(true)
+		$Line2D.visible = true
+	else:
+		set_physics_process(false)
+		$Line2D.points[1] = Vector2.ZERO
+		$Line2D.visible = false
 
 func _physics_process(delta: float) -> void:
 	var cast_point := target_position
@@ -34,7 +40,6 @@ func set_is_casting(cast: bool) -> void:
 	$Line2D.visible = _is_casting
 
 func toggle_trigger():
-	# This will now correctly trigger your custom setter for 'is_casting'
 	self.is_casting = !self.is_casting
 
 func appear() -> void:
